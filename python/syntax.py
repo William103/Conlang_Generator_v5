@@ -27,6 +27,7 @@ def init():
     global verb_attraction
     global serial_verb
     global ps_rules
+    global lexicon
     head_first = random.random() < 0.5
     subject_left = random.random() < 0.90
     verb_attraction = random.random() < 0.2
