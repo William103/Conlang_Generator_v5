@@ -5,6 +5,8 @@ subject_left = False
 verb_attraction = False
 serial_verb = False
 
+english_mode = True
+
 ps_rules = {}
 lexicon = {}
 englexicon = {}
@@ -28,6 +30,7 @@ def init():
     global serial_verb
     global ps_rules
     global lexicon
+    global englexicon
     head_first = random.random() < 0.5
     subject_left = random.random() < 0.90
     verb_attraction = random.random() < 0.2
@@ -81,33 +84,29 @@ def init():
         if i % 2 == 0:
             englexicon[lextemp[i].replace('\n','').replace(':','')] = lextemp[i+1].replace('\n','').split(',')
 
-    # uncomment for english mode
-    #ps_rules = english_ps_rules
-    #lexicon = englexicon
-    #verb_attraction = False
+    if english_mode:
+        ps_rules = english_ps_rules
+        verb_attraction = False
+        lexicon = {}
+        lexicon['Intrans'] = englexicon['Intrans']
+        lexicon['Trans'] = englexicon['Trans']
+        lexicon['Subjunct'] = englexicon['Subjunct']
+        with open('nouns.txt') as f:
+            lexicon['N'] = []
+            for noun in f:
+                lexicon['N'].append(noun.replace('\n','').replace(' ','').replace('[','').replace(']',''))
+        with open('adjcs.txt') as f:
+            lexicon['A'] = []
+            for adjc in f:
+                lexicon['A'].append(adjc.replace('\n','').replace(' ','').replace('[','').replace(']',''))
+        with open('preps.txt') as f:
+            lexicon['P'] = []
+            for prep in f:
+                lexicon['P'].append(prep.replace('\n','').replace(' ','').replace('[','').replace(']',''))
+        lexicon['D'] = ['the', 'a', 'that', 'this']
+        englexicon = lexicon
 
 
-nouns = []
-with open('nouns.txt') as f:
-    for noun in f:
-        nouns.append(noun.replace('\n','').replace(' ','').replace('[','').replace(']',''))
-verbs = []
-with open('verbs.txt') as f:
-    for verb in f:
-        verbs.append(verb.replace('\n','').replace(' ','').replace('[','').replace(']',''))
-adjcs = []
-with open('adjcs.txt') as f:
-    for adjc in f:
-        adjcs.append(adjc.replace('\n','').replace(' ','').replace('[','').replace(']',''))
-preps = []
-with open('preps.txt') as f:
-    for prep in f:
-        preps.append(prep.replace('\n','').replace(' ','').replace('[','').replace(']',''))
-advbs = []
-with open('advbs.txt') as f:
-    for advb in f:
-        advbs.append(advb.replace('\n','').replace(' ','').replace('[','').replace(']',''))
-detrs = ['the', 'a']
 
 # does some magic to recursively-ish generate a random tree using the PS-rules
 # and moves the verb around if we're dealing with verb attraction. The
@@ -228,9 +227,10 @@ def build_sentence():
             sentence += adjcs[j] + ' '
             engsentence += englexicon['A'][j] + ' '
         elif char == 'B' and tree[i+1] == ' ':
-            j = random.randrange(len(adjcs))
-            sentence += advbs[j] + ' '
-            engsentence += advbs[j] + ' '
+            #j = random.randrange(len(adjcs))
+            #sentence += advbs[j] + ' '
+            #engsentence += advbs[j] + ' '
+            pass
         elif char == 'S':
             if verb_attraction:
                 if tree[i+1] == "'" and not outer_s: engsentence += 'that '
@@ -239,4 +239,6 @@ def build_sentence():
                 if not tree[i+1] == "'" and not outer_s: engsentence += 'that '
                 else: outer_s = False
     sentence = (sentence.capitalize()[:-1] + '.').replace('[','').replace(']','')
+    engsentence = (engsentence.capitalize()[:-1] + '.').replace('[','').replace(']','')
+    if english_mode: sentence = engsentence
     return sentence,engsentence
