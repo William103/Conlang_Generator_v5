@@ -5,7 +5,7 @@ subject_left = False
 verb_attraction = False
 serial_verb = False
 
-english_mode = True
+english_mode = False
 
 ps_rules = {}
 lexicon = {}
