@@ -1,0 +1,7 @@
+on
+around
+by
+in
+for
+to
+with
