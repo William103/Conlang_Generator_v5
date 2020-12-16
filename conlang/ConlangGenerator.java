@@ -30,10 +30,10 @@ class ConlangGenerator {
         System.out.print('V');
         for (int i = 0; i < phonology.finalConsonants; i++) {System.out.print("(C)");}
         System.out.println("\nPossible Initial Clusters:");
-        ArrayList<ArrayList<Character>> used = new ArrayList<ArrayList<Character>>();
-        for (ArrayList<Character> cluster : phonology.initialClusters) {
-            if (cluster.size() > 0 && !(used.contains(cluster))) {
-                for (char consonant : cluster) {
+        ArrayList<String> used = new ArrayList<>();
+        for (String cluster : phonology.initialClusters) {
+            if (cluster.length() > 0 && !(used.contains(cluster))) {
+                for (char consonant : cluster.toCharArray()) {
                     System.out.print(consonant);
                 }
                 used.add(cluster);
@@ -42,9 +42,9 @@ class ConlangGenerator {
         }
         used.clear();
         System.out.println("\nPossible Medial Clusters:");
-        for (ArrayList<Character> cluster : phonology.medialClusters) {
-            if (cluster.size() > 0 && !(used.contains(cluster))) {
-                for (char consonant : cluster) {
+        for (String cluster : phonology.medialClusters) {
+            if (cluster.length() > 0 && !(used.contains(cluster))) {
+                for (char consonant : cluster.toCharArray()) {
                     System.out.print(consonant);
                 }
                 used.add(cluster);
@@ -53,9 +53,9 @@ class ConlangGenerator {
         }
         used.clear();
         System.out.println("\nPossible Final Clusters:");
-        for (ArrayList<Character> cluster : phonology.finalClusters) {
-            if (cluster.size() > 0 && !(used.contains(cluster))) {
-                for (char consonant : cluster) {
+        for (String cluster : phonology.finalClusters) {
+            if (cluster.length() > 0 && !(used.contains(cluster))) {
+                for (char consonant : cluster.toCharArray()) {
                     System.out.print(consonant);
                 }
                 used.add(cluster);

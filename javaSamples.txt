@@ -76,3 +76,21 @@ Uvivaχ: Arɯlɯpovuziqəχ uzafarefazaχaap auq Champs-Elyséesaχoχ auzoχaup
 Literally: To-eat-lunch-acc love-very-ed would Champs-Elysées-the-prep he-dat with I.
 
 
+Seed: 6708199042156
+Ətɯv: Əivəvaf aadətidəv atɯv Champs-Elyséesaf əf ɯfaf atɯf ɯtətɯvəivaav itɯv.
+
+Literally: Love-ed very would Champs-Elysées-dat on he-dat with to-eat-lunch-acc I.
+
+
+Seed: 7387471687900
+Navmuf: Ŋyxfax tavfogsabɣux kɯgsapvoŋvufpɯŋ bɯxbəxbinŋumfas kunŋoxbaŋkab Champs-Elyséesvufbaf.
+
+Literally: I finish love-very-ed to-eat-lunch he-with Champs-Elysées-the-loc.
+
+
+Seed: 7507177000611
+Kɯfumaŋa: Pigo buGibaby qumu po moChamps-Elyséesmu myɦabedopy 'oɴamyŋɯ Giɦopi'u.
+
+Literally: I with he-dat  on the-Champs-Elysées-dat to-eat-lunch-acc very love-ed.
+
+

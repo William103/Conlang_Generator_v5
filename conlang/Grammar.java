@@ -2,12 +2,12 @@ package conlang;
 
 import java.util.*;
 class Grammar {
-		ArrayList<String> pronouns = new ArrayList<String>();
+    ArrayList<String> pronouns = new ArrayList<String>();
     Random rand = new Random(ConlangGenerator.seed);
     ArrayList<String> cases = new ArrayList<String>();
     boolean isErgative = rand.nextInt(5) == 0;
     boolean headFinal = rand.nextBoolean();
-		boolean inflectsParticiples = rand.nextBoolean();
+    boolean inflectsParticiples = rand.nextBoolean();
     ArrayList<String> wordOrder = new ArrayList<String>();
     ArrayList<String> partsOfSpeech = new ArrayList<String>();
     HashMap<String, String> derivationalMorphology = new HashMap<String, String>();
@@ -21,7 +21,7 @@ class Grammar {
     String infinitive;
 
     public Grammar(Phonology phonology) {
-				// Deciding the word order by literally shuffling it
+        // Deciding the word order by literally shuffling it
         wordOrder.add("Subject");
         wordOrder.add("Verb");
         wordOrder.add("Object");
@@ -29,7 +29,7 @@ class Grammar {
         Collections.shuffle(wordOrder, rand);
 
         // Setting up all the grammar stuff so I can cut it later
-				if (isErgative) {
+        if (isErgative) {
             cases.add("ergative");
             cases.add("absolutive");
         } else {
@@ -136,7 +136,7 @@ class Grammar {
     }
 
     void createDerivationalMorphology(Phonology phonology) {
-				// Derivational morphology is how you turn words into other words. For example, the -or suffix in "actor" means "one who ___," or the -ly suffix in "badly" changes the adjective into an adverb. What this program does, is it picks parts of speech at random and creates either prefixes or suffixes to change parts of speech besides a list of common derivational morphologies.
+        // Derivational morphology is how you turn words into other words. For example, the -or suffix in "actor" means "one who ___," or the -ly suffix in "badly" changes the adjective into an adverb. What this program does, is it picks parts of speech at random and creates either prefixes or suffixes to change parts of speech besides a list of common derivational morphologies.
         String key;
         String value;
         for (int i = 0; i < rand.nextInt(10); i++) {
@@ -166,7 +166,7 @@ class Grammar {
     }
 
     void createEndings(Phonology phonology) {
-				// Iterates through all the grammar stuff creating endings. I may change this later to avoid the massive numbers of endings.
+        // Iterates through all the grammar stuff creating endings. I may change this later to avoid the massive numbers of endings.
         for (int i = 0; i < cases.size(); i++) {
             for (int j = 0; j < numbers.size(); j++) {
                 nounEndings.add(phonology.generateWord(1));
@@ -187,7 +187,7 @@ class Grammar {
     }
 
     String findVerbEnding(String aspect, String mood, String number, String person, String tense) {
-				// Manages to find a specific ending in the unmarked list of endings by crazy math that would take a while to explain
+        // Manages to find a specific ending in the unmarked list of endings by crazy math that would take a while to explain
         return verbEndings.get(tenses.size() * persons.size() * numbers.size() * moods.size() * checkIfExists(aspects, aspect) + tenses.size() * persons.size() * numbers.size() * checkIfExists(moods, mood) + tenses.size() * persons.size() * checkIfExists(numbers, number) + tenses.size() * checkIfExists(persons, person) + checkIfExists(tenses, tense));
     }
 
@@ -199,24 +199,24 @@ class Grammar {
         return (list.contains(checker)) ? list.indexOf(checker) : 0;
     }
 
-		void createPronouns(Phonology phonology) {
-			// Iterates through cases, numbers, and persons to create pronouns, with the possibility of just adding an ending to a stem
-			String templates[] = {phonology.generateWord(1), phonology.generateWord(1), phonology.generateWord(1)};
-			for (int i = 0; i < cases.size(); i++) {
-				for (int j = 0; j < numbers.size(); j++) {
-					for (int k = 0; k < persons.size(); k++){
-                        if (rand.nextInt(20) == 1) {
-						// if (rand.nextBoolean()) {
-							pronouns.add(phonology.generateWord(rand.nextInt(2) + 1));
-						} else {
-							pronouns.add(templates[k] + findNounEnding(cases.get(i), numbers.get	(j)));
-						}
-					}
-				}
-			}
-		}
-		
-		String findPronoun(String pronounCase, String number, String person) {
-			return pronouns.get(persons.size() * numbers.size() * checkIfExists(persons, person) + persons.size() * checkIfExists(numbers, number) + checkIfExists(cases, pronounCase));
-		}
-}
+    void createPronouns(Phonology phonology) {
+        // Iterates through cases, numbers, and persons to create pronouns, with the possibility of just adding an ending to a stem
+        String templates[] = {phonology.generateWord(1), phonology.generateWord(1), phonology.generateWord(1)};
+        for (int i = 0; i < cases.size(); i++) {
+            for (int j = 0; j < numbers.size(); j++) {
+                for (int k = 0; k < persons.size(); k++){
+                    if (rand.nextInt(20) == 1) {
+                        // if (rand.nextBoolean()) {
+                        pronouns.add(phonology.generateWord(rand.nextInt(2) + 1));
+                    } else {
+                        pronouns.add(templates[k] + findNounEnding(cases.get(i), numbers.get	(j)));
+                    }
+                    }
+                }
+            }
+        }
+
+        String findPronoun(String pronounCase, String number, String person) {
+            return pronouns.get(persons.size() * numbers.size() * checkIfExists(persons, person) + persons.size() * checkIfExists(numbers, number) + checkIfExists(cases, pronounCase));
+        }
+    }

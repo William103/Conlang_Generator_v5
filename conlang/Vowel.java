@@ -17,53 +17,53 @@ class Vowel {
     char findString() {
         switch (backness) {
             case "back":
-            if (isHigh) {
-                if (isRounded) {
-                    return 'u';
+                if (isHigh) {
+                    if (isRounded) {
+                        return 'u';
+                    } else {
+                        return 0x026F;
+                    }
                 } else {
-                    return 0x026F;
+                    if (isRounded) {
+                        return 'o';
+                    } else {
+                        return 'a';
+                    }
                 }
-            } else {
-                if (isRounded) {
-                    return 'o';
-                } else {
-                    return 'a';
-                }
-            }
             case "central":
-            return 0x0259;
+                return 0x0259;
             case "front":
-            if (isHigh) {
-                if (isRounded) {
-                    return 'y';
+                if (isHigh) {
+                    if (isRounded) {
+                        return 'y';
+                    } else {
+                        return 'i';
+                    }
                 } else {
-                    return 'i';
+                    if (isRounded) {
+                        return 'a';
+                        //return 'œ';
+                    } else {
+                        return 'e';
+                    }
                 }
-            } else {
-                if (isRounded) {
-                    return 'a';
-                    //return 'œ';
+            case "near-front":
+                if (isHigh) {
+                    if (isRounded) {
+                        return 'a';
+                    } else {
+                        return 'a';
+                        //return 'ɪ';
+                    }
                 } else {
-                    return 'e';
+                    if (isRounded) {
+                        return 'a';
+                        //return 'ɶ';
+                    } else {
+                        return 'a';
+                        //return 'æ';
+                    }
                 }
-            }
-						case "near-front":
-						if (isHigh) {
-							if (isRounded) {
-                  return 'a';
-							} else {
-                  return 'a';
-								  //return 'ɪ';
-							}
-						} else {
-							if (isRounded) {
-                  return 'a';
-								//return 'ɶ';
-							} else {
-                  return 'a';
-								//return 'æ';
-							}
-						}
         }
         return ' ';
     }

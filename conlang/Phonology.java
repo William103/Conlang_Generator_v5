@@ -1,29 +1,38 @@
 package conlang;
 
-import java.util.*;
-class Phonology {
-    ArrayList<Consonant> consonantInventory = new ArrayList<Consonant>();
-		ArrayList<Vowel[]> diphthongs = new ArrayList<Vowel[]>();
-    Random rand = new Random(ConlangGenerator.seed);
-    ArrayList<Vowel> vowelInventory = new ArrayList<Vowel>();
-    ArrayList<ArrayList<Character>> initialClusters = new ArrayList<ArrayList<Character>>();
-    ArrayList<ArrayList<Character>> medialClusters = new ArrayList<ArrayList<Character>>();
-    ArrayList<ArrayList<Character>> finalClusters = new ArrayList<ArrayList<Character>>();
-    int initialConsonants = 0;
-    int finalConsonants = 0;
-    int medialConsonants;
-    String name = new String();
-    String newName = new String();
-		Vowel[] newDiphthong;
+import java.util.ArrayList;
+import java.util.Random;
+import java.util.HashMap;
+import java.util.HashSet;
 
-    public Phonology() {
-        medialConsonants = rand.nextInt(3);
-        // medialConsonants = rand.nextInt(4) + 1;
+class Phonology
+{
+     Random rand = new Random(ConlangGenerator.seed);
+
+     ArrayList<Consonant> consonantInventory = new ArrayList<>();
+     ArrayList<Vowel[]> diphthongs = new ArrayList<>();
+     ArrayList<Vowel> vowelInventory = new ArrayList<>();
+     ArrayList<String> initialClusters = new ArrayList<>();
+     ArrayList<String> medialClusters  = new ArrayList<>();
+     ArrayList<String> finalClusters   = new ArrayList<>();
+
+     int initialConsonants = 0;
+     int finalConsonants = 0;
+     int medialConsonants;
+
+     String name = new String();
+     String newName = new String();
+
+     Vowel[] newDiphthong;
+
+    public Phonology()
+    {
+        medialConsonants = rand.nextInt(4);
         for (int i = 0; i < medialConsonants; i++) {
-            if (rand.nextBoolean()) {
-                initialConsonants++;
-            } else {
+            if (rand.nextInt(2) == 0) {
                 finalConsonants++;
+            } else {
+                initialConsonants++;
             }
         }
 
@@ -34,15 +43,15 @@ class Phonology {
 
         consonantInventory = createConsonantInventory();
         vowelInventory = createVowelInventory();
-				newDiphthong = new Vowel[]{vowelInventory.get(rand.nextInt(vowelInventory.size())), vowelInventory.get(rand.nextInt(vowelInventory.size()))};
-				if (rand.nextBoolean()) {
-					for (int i = 0; i < rand.nextInt(6); i++) {
-						if (!diphthongs.contains(newDiphthong)) {
-							diphthongs.add(newDiphthong);
-							newDiphthong = new Vowel[]{vowelInventory.get(rand.nextInt(vowelInventory.size())), vowelInventory.get(rand.nextInt(vowelInventory.size()))};
-						}
-					}
-				}
+        newDiphthong = new Vowel[]{vowelInventory.get(rand.nextInt(vowelInventory.size())), vowelInventory.get(rand.nextInt(vowelInventory.size()))};
+        if (rand.nextBoolean()) {
+            for (int i = 0; i < rand.nextInt(6); i++) {
+                if (!diphthongs.contains(newDiphthong)) {
+                    diphthongs.add(newDiphthong);
+                    newDiphthong = new Vowel[]{vowelInventory.get(rand.nextInt(vowelInventory.size())), vowelInventory.get(rand.nextInt(vowelInventory.size()))};
+                }
+            }
+        }
 
         for (int i = 0; i < rand.nextInt(initialConsonants * consonantInventory.size() * 5 + 1) + initialConsonants; i++) {
             initialClusters.add(createCluster(initialConsonants));
@@ -61,57 +70,75 @@ class Phonology {
         name = newName;
     }
 
-    ArrayList<Consonant> createConsonantInventory() {
-        ArrayList<String> typesOfArticulation = new ArrayList<String>();
-        typesOfArticulation.add("plosive");
-        typesOfArticulation.add("fricative");
-        typesOfArticulation.add("nasal");
-				typesOfArticulation.add("lateral");
+    ArrayList<Consonant> createConsonantInventory()
+    {
+        HashMap<String, Double> typesOfArticulation = new HashMap<>();
+        typesOfArticulation.put("plosive", 0.9);
+        typesOfArticulation.put("fricative", 0.8);
+        typesOfArticulation.put("nasal", 0.9);
+        typesOfArticulation.put("lateral", 0.4);
+        typesOfArticulation.put("retroflex", 0.05);
 
-        ArrayList<String> placesOfArticulation = new ArrayList<String>();
-        placesOfArticulation.add("alveolar");
-        placesOfArticulation.add("bilabial");
-        placesOfArticulation.add("velar");
-        placesOfArticulation.add("palatal");
-        placesOfArticulation.add("uvular");
+        HashMap<String, Double> placesOfArticulation = new HashMap<>();
+        placesOfArticulation.put("alveolar", 0.9);
+        placesOfArticulation.put("bilabial", 0.9);
+        placesOfArticulation.put("velar", 0.9);
+        placesOfArticulation.put("palatal", 0.2);
+        placesOfArticulation.put("uvular", 0.2);
+        placesOfArticulation.put("glottal", 0.5);
 
-        typesOfArticulation.remove(rand.nextInt(typesOfArticulation.size()));
-
-        int size = placesOfArticulation.size();
-        for (int i = 0; i < rand.nextInt(placesOfArticulation.size()); i++) {
-            placesOfArticulation.remove(rand.nextInt(size));
-            size--;
+        ArrayList<String> toRemove = new ArrayList<>();
+        for (String type : typesOfArticulation.keySet()) {
+            if (rand.nextDouble() > typesOfArticulation.get(type)) {
+                toRemove.add(type);
+            }
         }
+        for (String type : toRemove) {
+            typesOfArticulation.remove(type);
+        }
+        
+        toRemove.clear();
+        for (String place : placesOfArticulation.keySet()) {
+            if (rand.nextDouble() > placesOfArticulation.get(place)) {
+                toRemove.add(place);
+            }
+        }
+        for (String place : toRemove) {
+            placesOfArticulation.remove(place);
+        }
+        
+        boolean distinguishVoice = !(rand.nextInt(5) == 0);
 
-        boolean distinguishVoice = !(0 == rand.nextInt(10));
+        HashSet<Consonant> consonantInventory = new HashSet<>();
+        Consonant temp, temp2;
 
-        ArrayList<Consonant> consonantInventory = new ArrayList<Consonant>();
-				Consonant temp, temp2;
+        for (String placeOfArticulation : placesOfArticulation.keySet()) {
+            for (String typeOfArticulation : typesOfArticulation.keySet()) {
+                temp  = new Consonant(placeOfArticulation, typeOfArticulation, true);
+                temp2 = new Consonant(placeOfArticulation, typeOfArticulation, false);
 
-        for (String placeOfArticulation : placesOfArticulation) {
-            for (String typeOfArticulation : typesOfArticulation) {
-							temp = new Consonant(placeOfArticulation, typeOfArticulation, true);
-							temp2 = new Consonant(placeOfArticulation, typeOfArticulation, false);
-              
-							if (temp.rep != ' ' && distinguishVoice && typeOfArticulation != "nasal" && typeOfArticulation != "lateral") {
-								consonantInventory.add(temp);
-							}
-							if (temp2.rep != ' ') {
-								consonantInventory.add(temp2);
-							}
+                if (temp.rep != ' ' && distinguishVoice) {
+                    consonantInventory.add(temp);
+                }
+                if (temp2.rep != ' ') {
+                    consonantInventory.add(temp2);
+                }
             }
         }
 
+        ArrayList<Consonant> consonantInventoryList = new ArrayList<>(consonantInventory);
+        
         if (rand.nextInt(1) == 0) {
-            for (int i = 0; i < rand.nextInt(consonantInventory.size() / 2); i++) {
-                consonantInventory.remove(rand.nextInt(consonantInventory.size()));
+            for (int i = 0; i < rand.nextInt(consonantInventoryList.size() / 2); i++) {
+                consonantInventoryList.remove(rand.nextInt(consonantInventoryList.size()));
             }
         }
 
-        return consonantInventory;
+        return consonantInventoryList;
     }
 
-    ArrayList<Vowel> createVowelInventory() {
+    ArrayList<Vowel> createVowelInventory()
+    {
         ArrayList<String> backnesses = new ArrayList<String>();
         backnesses.add("front");
         backnesses.add("central");
@@ -137,15 +164,13 @@ class Phonology {
         return vowelInventory;
     }
 
-    ArrayList<Character> createCluster(int size) {
+    String createCluster(int size)
+    {
         ArrayList<Consonant> cluster = new ArrayList<Consonant>();
         if (size == 0) {
-            ArrayList<Character> temp = new ArrayList<Character>();
-            return temp;
+            return "";
         } else if (size == 1) {
-            ArrayList<Character> temp = new ArrayList<Character>();
-            temp.add(consonantInventory.get(rand.nextInt(consonantInventory.size())).rep);
-            return temp;
+            return "" + consonantInventory.get(rand.nextInt(consonantInventory.size())).rep;
         }
         for (int i = 0; i < rand.nextInt(size - 1) + 2; i++) {
             if (i == 0) {
@@ -162,47 +187,47 @@ class Phonology {
                 }
             }
         }
-        ArrayList<Character> realCluster = new ArrayList<Character>();
+        String realCluster = "";
         for (Consonant consonant : cluster) {
-            realCluster.add(consonant.rep);
+            realCluster += consonant.rep;
         }
         return realCluster;
     }
 
-    String generateWord(int syllables) {
+    String generateWord(int syllables)
+    {
         String word = "";
-				ArrayList<Character> choice = new ArrayList<Character>();
-        ArrayList<Character> bleh = new ArrayList<Character>();
-				if (initialClusters.size() > 0) {
-					choice = initialClusters.get(rand.nextInt(initialClusters.size()));
-				} else {
-					choice = bleh;
-				}
-				if (choice.size() > 0) {if (choice.get(0) == ' ') {choice = bleh;}}
-        if (choice.size() > 0) {
-            for (char consonant : choice) {
-                word = word + consonant;
+        String choice;
+        if (initialClusters.size() > 0) {
+            choice = initialClusters.get(rand.nextInt(initialClusters.size()));
+        } else {
+            choice = "";
+        }
+        if (choice.length() > 0) {if (choice.charAt(0) == ' ') {choice = "";}}
+        if (choice.length() > 0) {
+            for (char consonant : choice.toCharArray()) {
+                word += consonant;
             }
         }
-				if (rand.nextInt(vowelInventory.size() + diphthongs.size()) < vowelInventory.size()) {
-					word += vowelInventory.get(rand.nextInt(vowelInventory.size())).rep;
-				} else {
-					for (Vowel vowel : diphthongs.get(rand.nextInt(diphthongs.size()))) {
-						word += vowel.rep;
-					}
-				}
+        if (rand.nextInt(vowelInventory.size() + diphthongs.size()) < vowelInventory.size()) {
+            word += vowelInventory.get(rand.nextInt(vowelInventory.size())).rep;
+        } else {
+            for (Vowel vowel : diphthongs.get(rand.nextInt(diphthongs.size()))) {
+                word += vowel.rep;
+            }
+        }
         for (int i = 0; i < syllables - 1; i++) {
             choice = medialClusters.get(rand.nextInt(medialClusters.size()));
-            if (choice.size() > 0) {
-                for (char consonant : choice) {
+            if (choice.length() > 0) {
+                for (char consonant : choice.toCharArray()) {
                     word = word + consonant;
                 }
             }
             word = word + vowelInventory.get(rand.nextInt(vowelInventory.size())).rep;
         }
-        choice = (finalClusters.size() > 0) ? finalClusters.get(rand.nextInt(finalClusters.size())) : bleh;
-        if (choice.size() > 0) {
-            for (char consonant : choice) {
+        choice = (finalClusters.size() > 0) ? finalClusters.get(rand.nextInt(finalClusters.size())) : "";
+        if (choice.length() > 0) {
+            for (char consonant : choice.toCharArray()) {
                 word = word + consonant;
             }
         }
