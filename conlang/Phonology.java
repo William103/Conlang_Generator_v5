@@ -27,7 +27,8 @@ class Phonology
 
     public Phonology()
     {
-        medialConsonants = rand.nextInt(4);
+        medialConsonants = rand.nextInt(3);
+        // medialConsonants = rand.nextInt(4);
         for (int i = 0; i < medialConsonants; i++) {
             if (rand.nextInt(2) == 0) {
                 finalConsonants++;

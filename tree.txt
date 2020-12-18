@@ -1,14 +1,14 @@
 [CP
     [C -Q ]
     [C' []
-        [TP [DP []
-                [D'
-                    [D the ]
-                    [NP [] [N' [N cat ] []]]
-                ]
-            ]
-            [T' [T -past ]
-                [VP []
+        [TP []
+            [T' [T tense ]
+                [VP [DP []
+                        [D'
+                            [D the ]
+                            [NP [] [N' [N cat ] []]]
+                        ]
+                    ]
                     [V' [V kills ]
                         [DP []
                             [D' [D the ]

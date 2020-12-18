@@ -16,6 +16,7 @@ class ConlangGenerator {
         grammar.createPronouns(phonology);
 
         // Just outputting everything to the console
+        /*
         System.out.println(phonology.newName + ": \n\n");
         System.out.println("Phonology: \n");
         System.out.println("Consonants:");
@@ -120,22 +121,21 @@ class ConlangGenerator {
         }
         System.out.println();
         if (grammar.headFinal) {System.out.println("Head Final");} else {System.out.println("Head First");}
+        */
 
         // The Lexicon class throws IOException, so we have to be careful about instantiating it, and Translation uses Lexicon, so that goes here too.
         try {
             Lexicon words = new Lexicon(phonology);
             Translation translation = new Translation(words, grammar);
-            words.write(phonology, grammar, translation);
-            System.out.println("\nSample sentence: " + translation.newSentence);
-            System.out.println("\nEnglish: " + translation.sentence);
-            System.out.println("\nLiterally: " + translation.literalSentence);
-            translation.writeSentence(phonology);
+            Syntax syntax = new Syntax();
 
-            Node root = ParseTree.parse();
-            root.setParents();
-            System.out.println(root.pronounce(grammar, words, false, true));
-            System.out.println("");
-            System.out.println(root.pronounceEnglish());
+            // words.write(phonology, grammar, translation);
+            // System.out.println("\nSample sentence: " + translation.newSentence);
+            // System.out.println("\nEnglish: " + translation.sentence);
+            // System.out.println("\nLiterally: " + translation.literalSentence);
+            // translation.writeSentence(phonology);
+
+            syntax.printSentence(grammar, words);
 
             String input = scan.next();
             while (true) {
