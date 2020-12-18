@@ -3,19 +3,19 @@ package conlang;
 import java.io.*;
 import java.util.*;
 class ConlangGenerator {
-		// Make sure eveything uses the same seed so I can come back to ones I like, or keep the seeds of grammars or phonologies I like
+    // Make sure eveything uses the same seed so I can come back to ones I like, or keep the seeds of grammars or phonologies I like
     public static long seed = System.nanoTime();
     public static void main(String[] args) {
-				// Instantiate all the classes, except Lexicon, which comes later
+        // Instantiate all the classes, except Lexicon, which comes later
         Phonology phonology = new Phonology();
         Grammar grammar = new Grammar(phonology);
         Scanner scan = new Scanner(System.in);
 
         grammar.createEndings(phonology);
         grammar.createDerivationalMorphology(phonology);
-				grammar.createPronouns(phonology);
+        grammar.createPronouns(phonology);
 
-				// Just outputting everything to the console
+        // Just outputting everything to the console
         System.out.println(phonology.newName + ": \n\n");
         System.out.println("Phonology: \n");
         System.out.println("Consonants:");
@@ -24,7 +24,7 @@ class ConlangGenerator {
         }
         System.out.println("\nVowels: ");
         for (Vowel vowel : phonology.vowelInventory) {System.out.print(vowel.rep + ", ");}
-				for (Vowel[] diphthong : phonology.diphthongs) {System.out.println("" + diphthong[0].rep + diphthong[1].rep + ", ");}
+        for (Vowel[] diphthong : phonology.diphthongs) {System.out.println("" + diphthong[0].rep + diphthong[1].rep + ", ");}
         System.out.println("\nPhonotactics:");
         for (int i = 0; i < phonology.initialConsonants; i++) {System.out.print("(C)");}
         System.out.print('V');
@@ -73,14 +73,14 @@ class ConlangGenerator {
             }
         }
 
-				System.out.println("\n\nPronouns:\n");
-				q = 0;
-				for (int i = 0; i < grammar.cases.size(); i++) {
+        System.out.println("\n\nPronouns:\n");
+        q = 0;
+        for (int i = 0; i < grammar.cases.size(); i++) {
             for (int j = 0; j < grammar.numbers.size(); j++) {
-								for (int k = 0; k < 	grammar.persons.size(); k++) {
-                	System.out.println(grammar.numbers.get(j) + ", " + grammar.cases.get(i) + ", " + grammar.persons.get(k) + ": " + grammar.pronouns.get(q));
-                q++;
-								}
+                for (int k = 0; k < 	grammar.persons.size(); k++) {
+                    System.out.println(grammar.numbers.get(j) + ", " + grammar.cases.get(i) + ", " + grammar.persons.get(k) + ": " + grammar.pronouns.get(q));
+                    q++;
+                }
             }
         }
 
@@ -130,6 +130,13 @@ class ConlangGenerator {
             System.out.println("\nEnglish: " + translation.sentence);
             System.out.println("\nLiterally: " + translation.literalSentence);
             translation.writeSentence(phonology);
+
+            Node root = ParseTree.parse();
+            root.setParents();
+            System.out.println(root.pronounce(grammar, words, false, true));
+            System.out.println("");
+            System.out.println(root.pronounceEnglish());
+
             String input = scan.next();
             while (true) {
                 System.out.println(words.lexicon.get(input));

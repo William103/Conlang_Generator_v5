@@ -94,3 +94,159 @@ Kɯfumaŋa: Pigo buGibaby qumu po moChamps-Elyséesmu myɦabedopy 'oɴamyŋɯ Gi
 Literally: I with he-dat  on the-Champs-Elysées-dat to-eat-lunch-acc very love-ed.
 
 
+Seed: 11253441501521
+I'atulof: Eta'ox əxɯləpufəfuɫ ip Champs-Elyséesəf ilɯlaf alal ixolif ɯlih.
+
+Literally: To-eat-lunch love-very-ed would Champs-Elysées-the on he with I.
+
+
+Seed: 7498453826407
+Ŋomɯfəbɯ: Vɯpi ɟamaŋa voxo mamamo ŋɯmuma Champs-Elyséesŋa ŋijəñi.
+
+Literally: I love-ed very would to-eat-lunch Champs-Elysées-prep he-with.
+
+
+Seed: 7687634382253
+Uŋaŋiŋəx: Aŋugav ɯgizɯnoŋ agodɯ' ov aza'a'ɯzɯŋ Champs-Elysées əzaŋ ɯvafav oigadɯ' ɯnɯn.
+
+Literally: To-eat-lunch love-ed very would finish Champs-Elysées on he with I.
+
+
+Seed: 7707633573798
+Mmeñŋmañŋmommañ: Mvumñuvmmeɣ ŋñymmajmmum ŋñymmuñ ñɣemChamps-Elysées ñjəmjjymñyj mvəmɣɣejmŋuɣñvəɣ mmymʒmañ mmomɣɣamñvix.
+
+Literally: With he on the-Champs-Elysées would love-very-ed I to-eat-lunch.
+
+
+Seed: 7752301073782
+Gualamiɫa: Champs-Elysées golɯɫo lumu talaɫomi laɫulɯləlu'i 'uaɫeɫɯma ga'ɯɫelopope la'e.
+
+Literally: Champs-Elysées on he with love-very-ed finish to-eat-lunch-noun I.
+
+
+Seed: 7756712560464
+Yn'obnotŋɯtm: Ɯʎñanʎol'uñk y'ligʎ Champs-Elysées yɟm u'ŋyɟm alʎutm imloɟɫədmamd o'ʎidliñŋyɟm ucnimñɯmʎ ɯlkylŋicnɯ'l.
+
+Literally: To-eat-lunch I Champs-Elysées on he with love-ed very would finish.
+
+
+Seed: 8025644021914
+Dŋɯtŋɯŋpunkɯp: Ŋtinknyp tŋyɯpŋyŋkŋupŋɯpknən tnuknib tŋyɯŋpɯkŋindŋippŋyɯp ŋtiŋpynkybŋtib Champs-Elyséestnyɯp.
+
+Literally: I-erg to-eat-lunch very love-ed he-with Champs-Elysées-prep.
+
+
+Seed: 8073755373859
+Saəfuna: Champs-Elyséestete tonutətə təfə sufamenətəso futufatefo to.
+
+Literally: Champs-Elysées-the-loc he-with I to-eat-lunch-acc very-love-ed would.
+
+
+Seed: 8136797955857
+Nyŋnytnyŋnɯŋ: Noŋneŋ ŋumge'neŋ no'nuŋnud 'əŋnymgɯtnoŋkyg ŋaŋnamgaŋ 'id ŋɯtnoŋneŋ Champs-Elysées'əŋ koŋnadnɯd pagŋyg.
+
+Literally: Would finish very love-ed with he on Champs-Elysées-the to-eat-lunch I.
+
+
+Seed: 8254754112977
+Numzon: Ɣunhomzɯɣɦuŋnənɦauh ɣyŋnən ɣynfɯŋnoŋnah hivnoɣɦynfɯnɦɯhnih ɣənŋən hynChamps-Elysées ŋyn hɯnfan ɣɯɣɦymzin.
+
+Literally: Very-love-ed would finish to-eat-lunch-acc I the-Champs-Elysées on he with.
+
+
+Seed: 8273038505769
+Sɯle: Gogo zyxiliɫɯy gedodi Champs-Elyséesɫɯy teza xaxyɫɯlisɯ litazo tozixɯga laaseɯtyza.
+
+Literally: With he-dat  on Champs-Elysées-dat I to-eat-lunch-acc would finish very-love-ed.
+
+
+Seed: 8292833378893
+Laminili: Məti te'əlelo tə lepo mamikimə mala taky tanyñi Champs-Elysées.
+
+Literally: I to-eat-lunch would very love-ed with he on Champs-Elysées.
+
+
+Seed: 8313014672582
+Gɣikma: Mŋa ŋvekfammevbiepve bmɯmmamŋy ɣbabmaŋgɯ gɣy gmɯmɣa Champs-Elyséesvbie ɣbagma.
+
+Literally: Would love-very-ed to-eat-lunch with he on Champs-Elysées-the I.
+
+
+Seed: 8322865743823
+ɴadoχa: ɴiChamps-Elysées ɴy nɯga nyŋɯ nuni ɴoGynani ɴededoGanane.
+
+Literally: The-Champs-Elysées on he with I love-very-ed to-eat-lunch-acc.
+
+
+Seed: 8343252986191
+Flyəngəʈbil: Gfungulszəɖsɣaɖ 'zənŋallɖuldɣal lʈaʈʈpəɫ'ənsəl sɣil'ɫyb nlyuldɫal Champs-Elyséesɖlabfliz ŋkyulɣzul 'ɖiɖliʈɦkaʈbəb.
+
+Literally: To-eat-lunch-abs love-ed very would I-erg Champs-Elysées-the-prep he-dat with.
+
+
+Seed: 8564233111410
+Əmymən: Oɫunəneŋəl aaɫamun alɯl əmulaɫan Champs-Elyséeseŋan ylun amənalan uɫonyɫol.
+
+Literally: Love-very-ed would I to-eat-lunch Champs-Elysées-the-dat on he-dat with.
+
+
+Seed: 8644056195206
+Əvyɣeɣ: Avəneŋəvaŋ ynanuz Champs-Elyséesəveŋ uɣeŋ aɣaɣəɣəŋ enəɣ.
+
+Literally: Love-very-ed would Champs-Elysées-the-loc he-with to-eat-lunch I.
+
+
+Seed: 8720390611169
+Omiloxɯk: Oxɯkɯk axam Champs-Elysées iləm oyk ixamɯx əxikanimok.
+
+Literally: To-eat-lunch I Champs-Elysées on he with love-very-ed.
+
+
+Seed: 8913925014689
+Kmarɣikɣofqu: Χrəvfe Champs-ElyséesGxɯ Gxɯkɣɯbvəkmo bɴɯvfɯ ŋŋyfɴɯGmə ŋkəŋvibχubχuGme GriGrəxɣypɴa.
+
+Literally: He-with Champs-Elysées-loc to-eat-lunch-acc I would finish very-love-ed.
+
+
+Seed: 8955188226443
+Mɯmo: Ɖimiɯ naŋaʈiɯ Champs-Elyséesɖoi ʈanɯmamu ɖa ɖuŋoŋamoiɖoi.
+
+Literally: I-erg he-with Champs-Elysées-prep to-eat-lunch would love-very-ed.
+
+
+Seed: 8999194291853
+Aɟfɯxtaʒɟypm: Champs-Elysées ofn exgipm axtakfyʒm ybʒyvguɟfybvangaffukx okfyʒɟungyfnuff ebv ipmupm.
+
+Literally: Champs-Elysées on he with to-eat-lunch-noun-acc love-very-ed would I.
+
+
+Seed: 9121226744289
+Akymilaŋ: Uliɣ uɣasumuɣul ufyɣ okalasan alChamps-Elysées iɫil op yɫul ofonan.
+
+Literally: I love-very-ed would finish the-Champs-Elysées on he with to-eat-lunch.
+
+
+Seed: 9153038236656
+Ɦɯtofeti: Vɯki zibazɯmyvɯtɯvɯ papamo pipamɯ ɦymymepa zatofɯ vəta xymeza vova bɯChamps-Elyséesza.
+
+Literally: I noun-to-eat-lunch-acc would finish very love-ed with he-dat  on the-Champs-Elysées-dat.
+
+
+Seed: 9184926708001
+Ɫelŋam'ɫɯhplevŋ: ⱢɯɦɣChamps-Elysées gəzf ɫəlɦ ŋalzɯnldɯmt ŋegɣgazf ŋillgebhnetnkɯlŋannŋɯls gəpɫ gamtivtvɯɦɣ.
+
+Literally: The-Champs-Elysées on he with I very-love-ed would to-eat-lunch.
+
+
+Seed: 9201960256279
+Ɯaɖalañ: Ɯgeñɯzɯañ ɯañ uʈylaluñ Champs-Elyséesɯzyz alañ yzyz ɯpyɖañ alasɯzez añɯañ.
+
+Literally: Love-very-ed would finish Champs-Elysées-the-dat on he-dat with to-eat-lunch I.
+
+
+Seed: 9229101657359
+Muma: Guyxa təzazu ŋukufafəɫy mɯfima kuy gufa Champs-Elyséeslɯɯ vuyzyzizaxiy.
+
+Literally: I would very-love-ed with he on Champs-Elysées-the to-eat-lunch.
+
+

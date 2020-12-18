@@ -2,7 +2,9 @@ package conlang;
 
 import java.util.*;
 import java.io.*;
-class Translation {
+
+class Translation
+{
     private static final String samplesFile = "javaSamples.txt";
     String sentence = "I would have so loved to have had lunch with him on the Champs-Elysées.";
     String newSentence = "";
@@ -16,6 +18,7 @@ class Translation {
     boolean hasDative;
     boolean hasPrepositional;
     boolean hasLocative;
+
     public Translation(Lexicon lexicon, Grammar grammar) {
         hasLocative = grammar.cases.contains("locative");
         hasSubjunctive = grammar.moods.contains("subjunctive");

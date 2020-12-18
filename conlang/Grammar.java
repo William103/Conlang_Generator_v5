@@ -90,14 +90,18 @@ class Grammar {
         infinitive = phonology.generateWord(1);
     }
 
-    // Crazy, overcomplicated way to randomly remove cases or tenses or whatever without ending up with only past, optative, momentane endings or whatever. It should be a lot simpler, but it was being weird about forgetting the length of the list 
-    void smartRemove(ArrayList<String> list) {
-        ArrayList<Integer> mem = new ArrayList<Integer>();
+    // Crazy, overcomplicated way to randomly remove cases or tenses
+    // or whatever without ending up with only past, optative, momentane
+    // endings or whatever. It should be a lot simpler, but it was being
+    // weird about forgetting the length of the list
+    void smartRemove(ArrayList<String> list)
+    {
+        ArrayList<Integer> mem = new ArrayList<>();
         int marker = rand.nextInt(list.size());
         int size = list.size();
         while (size > marker) {
             list.remove(size - 1);
-            size --;
+            size--;
         }
         int placeHolder;
         boolean noDuplicates;
@@ -135,8 +139,14 @@ class Grammar {
         }
     }
 
-    void createDerivationalMorphology(Phonology phonology) {
-        // Derivational morphology is how you turn words into other words. For example, the -or suffix in "actor" means "one who ___," or the -ly suffix in "badly" changes the adjective into an adverb. What this program does, is it picks parts of speech at random and creates either prefixes or suffixes to change parts of speech besides a list of common derivational morphologies.
+    void createDerivationalMorphology(Phonology phonology)
+    {
+        // Derivational morphology is how you turn words into other
+        // words. For example, the -or suffix in "actor" means "one who
+        // ___," or the -ly suffix in "badly" changes the adjective into an
+        // adverb. What this program does, is it picks parts of speech at
+        // random and creates either prefixes or suffixes to change parts
+        // of speech besides a list of common derivational morphologies.
         String key;
         String value;
         for (int i = 0; i < rand.nextInt(10); i++) {
@@ -195,7 +205,7 @@ class Grammar {
         return nounEndings.get(numbers.size() * checkIfExists(cases, nounCase) + checkIfExists(numbers, number));
     }
 
-    int checkIfExists (ArrayList<String> list, String checker) {
+    int checkIfExists(ArrayList<String> list, String checker) {
         return (list.contains(checker)) ? list.indexOf(checker) : 0;
     }
 
@@ -204,19 +214,19 @@ class Grammar {
         String templates[] = {phonology.generateWord(1), phonology.generateWord(1), phonology.generateWord(1)};
         for (int i = 0; i < cases.size(); i++) {
             for (int j = 0; j < numbers.size(); j++) {
-                for (int k = 0; k < persons.size(); k++){
+                for (int k = 0; k < persons.size(); k++) {
                     if (rand.nextInt(20) == 1) {
                         // if (rand.nextBoolean()) {
                         pronouns.add(phonology.generateWord(rand.nextInt(2) + 1));
                     } else {
                         pronouns.add(templates[k] + findNounEnding(cases.get(i), numbers.get	(j)));
                     }
-                    }
                 }
             }
         }
-
-        String findPronoun(String pronounCase, String number, String person) {
-            return pronouns.get(persons.size() * numbers.size() * checkIfExists(persons, person) + persons.size() * checkIfExists(numbers, number) + checkIfExists(cases, pronounCase));
-        }
     }
+
+    String findPronoun(String pronounCase, String number, String person) {
+        return pronouns.get(persons.size() * numbers.size() * checkIfExists(persons, person) + persons.size() * checkIfExists(numbers, number) + checkIfExists(cases, pronounCase));
+    }
+}

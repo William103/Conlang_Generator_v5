@@ -9,6 +9,7 @@ class Lexicon {
     PrintWriter out = null;
     HashMap<String, String> lexicon = new HashMap<String, String>();
     ArrayList<String> englishWords = new ArrayList<String>();
+
     public Lexicon(Phonology phonology) throws IOException{
         BufferedReader in = null;
         Random rand = new Random(ConlangGenerator.seed);
@@ -28,6 +29,11 @@ class Lexicon {
                 in.close();
             }
         }
+    }
+
+    public String getWord(String english)
+    {
+        return lexicon.get(english);
     }
 
     void write(Phonology phonology, Grammar grammar, Translation translation) {

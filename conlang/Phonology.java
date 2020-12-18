@@ -139,12 +139,12 @@ class Phonology
 
     ArrayList<Vowel> createVowelInventory()
     {
-        ArrayList<String> backnesses = new ArrayList<String>();
+        ArrayList<String> backnesses = new ArrayList<>();
         backnesses.add("front");
         backnesses.add("central");
         backnesses.add("back");
 
-        ArrayList<Vowel> vowelInventory = new ArrayList<Vowel>();
+        ArrayList<Vowel> vowelInventory = new ArrayList<>();
 
         for (String backness : backnesses) {
             if (backness != "central") {
