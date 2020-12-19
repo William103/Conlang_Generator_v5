@@ -135,7 +135,8 @@ class ConlangGenerator {
             // System.out.println("\nLiterally: " + translation.literalSentence);
             // translation.writeSentence(phonology);
 
-            syntax.printSentence(grammar, words);
+            Node root = ParseTree.parse();
+            syntax.printSentence(root, grammar, words);
 
             String input = scan.next();
             while (true) {

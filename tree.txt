@@ -12,7 +12,12 @@
                     [V' [V kills ]
                         [DP []
                             [D' [D the ]
-                                [NP [] [N' [N mouse ] []]]
+                                [NP []
+                                    [N'
+                                        [AP [] [A' [A red ] []]]
+                                        [N' [N mouse ] []]
+                                    ]
+                                ]
                             ]
                         ]
                     ]

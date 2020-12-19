@@ -1,5 +1,8 @@
 package conlang;
 
+import java.util.Set;
+import java.util.HashSet;
+
 class Node
 {
     private NodeType type;
@@ -61,18 +64,25 @@ class Node
         }
     }
 
-    public void handleMovement()
+    public void handleMovement(NodeType targetType, Projection targetProj, 
+                               NodeType movingType, Projection movingProj,
+                               NodeType sourceType, Projection sourceProj)
     {
-        if (type == NodeType.V && proj == Projection.Word) {
-            move(NodeType.T, Projection.Word);
+        if (left != null) {
+            left.handleMovement(targetType, targetProj,
+                                movingType, movingProj,
+                                sourceType, sourceProj);
         }
-        if (type == NodeType.D && proj == Projection.Phrase) {
-            move(NodeType.T, Projection.Phrase);
+        if (right != null) {
+            right.handleMovement(targetType, targetProj,
+                                 movingType, movingProj,
+                                 sourceType, sourceProj);
         }
-        if (left != null)
-            left.handleMovement();
-        if (right != null)
-            right.handleMovement();
+        if (type != movingType || proj != movingProj) return;
+        if (parent == null && sourceType != null && sourceProj != null) return;
+        if (sourceType != null && sourceProj != null && parent.type !=
+                sourceType && parent.proj != sourceProj) return;
+        move(targetType, targetProj);
     }
 
     public Node getSister()
@@ -105,6 +115,13 @@ class Node
         return sis != null && sis.type == NodeType.T && sis.proj == Projection.Bar;
     }
 
+    public boolean specVP()
+    {
+        Node DP = dominatingNode(NodeType.D, Projection.Phrase);
+        Node sis = DP == null ? null : DP.getSister();
+        return sis != null && sis.type == NodeType.V && sis.proj == Projection.Bar;
+    }
+
     public boolean compVP()
     {
         Node DP = dominatingNode(NodeType.D, Projection.Phrase);
@@ -112,19 +129,28 @@ class Node
         return sis != null && sis.type == NodeType.V && sis.proj == Projection.Word;
     }
 
-    public String pronounce(Grammar gram, Lexicon lex, boolean specFirst, boolean headFirst)
+    public String pronounce(Syntax s, Grammar gram,
+            Lexicon lex, boolean specFirst, boolean headFirst)
     {
         if (lexeme != "" && lexeme.charAt(0) != '-' && lexeme.charAt(0) != '+') {
             String res = lex.getWord(lexeme);
-            if (specTP()) {
-                res += gram.findNounEnding("nominative", "singular");
-            } else if (compVP()) {
+            if (compVP()) {
                 res += gram.findNounEnding("accusative", "singular");
+            }
+            if (s.VPExternalSubject) {
+                if (specTP()) {
+                    res += gram.findNounEnding("nominative", "singular");
+                }
+            } else if (specVP()) {
+                res += gram.findNounEnding("nominative", "singular");
             }
             return res;
         }
-        String leftPro  = left  != null ?  left.pronounce(gram, lex, specFirst, headFirst) : "";
-        String rightPro = right != null ? right.pronounce(gram, lex, specFirst, headFirst) : "";
+        String leftPro  = left  != null ?
+            left.pronounce(s, gram, lex, specFirst, headFirst) : "";
+        String rightPro = right != null ?
+            right.pronounce(s, gram, lex, specFirst, headFirst) : "";
+
         if (proj == Projection.Phrase) {
             if (specFirst)
                 return leftPro + " " + rightPro;
@@ -147,19 +173,24 @@ class Node
         return leftPro + " " + rightPro;
     }
 
-    public String pronounceLiteral(boolean specFirst, boolean headFirst)
+    public String pronounceLiteral(Syntax s, boolean specFirst, boolean headFirst)
     {
         if (lexeme != "" && lexeme.charAt(0) != '-' && lexeme.charAt(0) != '+') {
             String res = lexeme;
-            if (specTP()) {
-                res += "-nom";
-            } else if (compVP()) {
+            if (compVP()) {
                 res += "-acc";
+            }
+            if (s.VPExternalSubject) {
+                if (specTP()) {
+                    res += "-nom";
+                }
+            } else if (specVP()) {
+                res += "-nom";
             }
             return res;
         }
-        String leftPro  = left  != null ?  left.pronounceLiteral(specFirst, headFirst) : "";
-        String rightPro = right != null ? right.pronounceLiteral(specFirst, headFirst) : "";
+        String leftPro  = left  != null ?  left.pronounceLiteral(s, specFirst, headFirst) : "";
+        String rightPro = right != null ? right.pronounceLiteral(s, specFirst, headFirst) : "";
         if (proj == Projection.Phrase) {
             if (specFirst)
                 return leftPro + " " + rightPro;
@@ -174,14 +205,11 @@ class Node
 
     public void move(NodeType targetType, Projection targetLevel)
     {
-        Node target = dominatingNode(targetType, targetLevel);
-        if (target == null) {
-            // System.err.println("Target not found");
-            return;
-        }
         switch (targetLevel) {
             // move to specifier
             case Phrase:
+                Node target = dominatingNode(targetType, targetLevel);
+                if (target == null) return;
                 if (target.left == null) {
                     target.left = this;
                     // parent = target;
@@ -197,17 +225,50 @@ class Node
                 } else {
                     parent.right = null;
                 }
+                break;
 
             // head to head movement
             case Word:
-                target.lexeme = lexeme;
-                lexeme = "";
+                headMove(targetType);
                 break;
 
             // invalid movement?
             case Bar:
                 // System.err.println("Invalid movement");
                 break;
+        }
+    }
+
+    public Set<Node> dominatedNodes()
+    {
+        HashSet<Node> ret = new HashSet<>();
+        if (left != null) {
+            ret.add(left);
+            ret.addAll(left.dominatedNodes());
+        }
+        if (right != null) {
+            ret.add(right);
+            ret.addAll(right.dominatedNodes());
+        }
+        return ret;
+    }
+
+    public void headMove(NodeType type)
+    {
+        System.out.println("HEAD MOVE");
+        Node current = parent;
+        Set<Node> dominated = dominatedNodes();
+        while (current != null) {
+            Set<Node> candidates = current.dominatedNodes();
+            candidates.removeAll(dominated);
+            for (Node candidate : candidates) {
+                if (candidate.proj == Projection.Word && candidate.type == type) {
+                    candidate.lexeme = lexeme;
+                    lexeme = "<" + lexeme + ">";
+                    return;
+                }
+            }
+            current = current.parent;
         }
     }
 }

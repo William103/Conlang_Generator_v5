@@ -17,6 +17,9 @@ class Syntax
     // overt complementizer
     private boolean overtC;
 
+    // subject leaves VP
+    public boolean VPExternalSubject;
+
     private Random rand;
 
     public Syntax()
@@ -26,26 +29,41 @@ class Syntax
         // totally made up probabilities
         specFirst = rand.nextInt(10) != 0;
         headFirst = rand.nextBoolean();
-        System.out.println(specFirst + " " + headFirst);
         VtoT = rand.nextInt(5) != 0;
         overtC = rand.nextInt(5) == 0;
+        VPExternalSubject = false;
+        // VPExternalSubject = rand.nextInt(10) != 0;
+        System.out.println("specFirst:\t\t" + specFirst);
+        System.out.println("headFirst:\t\t" + headFirst);
+        System.out.println("VtoT:\t\t\t" + VtoT);
+        System.out.println("VPExternalSubject:\t" + VPExternalSubject);
     }
 
-    public void printSentence(Grammar grammar, Lexicon words)
+    public void handleMovement(Node root)
     {
-        try {
-            Node root = ParseTree.parse();
+        if (VtoT) {
+            root.handleMovement(NodeType.T, Projection.Word,
+                                NodeType.V, Projection.Word,
+                                null, null);
             root.setParents();
-            System.out.println(root);
-            root.handleMovement();
-            root.setParents();
-            System.out.println("");
-            System.out.println(root);
-            System.out.println(root.pronounce(grammar, words, specFirst, headFirst));
-            System.out.println(root.pronounceEnglish());
-            System.out.println(root.pronounceLiteral(specFirst, headFirst));
-        } catch (IOException e) {
-            System.err.println("Something went wrong: " + e.getMessage());
         }
+
+        if (VPExternalSubject) {
+            root.handleMovement(NodeType.T, Projection.Phrase,
+                                NodeType.D, Projection.Phrase,
+                                NodeType.V, Projection.Phrase);
+            root.setParents();
+        }
+    }
+
+    public void printSentence(Node root, Grammar grammar, Lexicon words)
+    {
+        root.setParents();
+        handleMovement(root);
+        System.out.println("\n" + root);
+        System.out.println("");
+        System.out.println(root.pronounce(this, grammar, words, specFirst, headFirst));
+        System.out.println(root.pronounceEnglish());
+        System.out.println(root.pronounceLiteral(this, specFirst, headFirst));
     }
 }
